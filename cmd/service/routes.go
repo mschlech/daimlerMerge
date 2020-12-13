@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/mschlech/daimlerMerge/cmd/handler"
+	"github.com/mschlech/daimler_merge/cmd/handler"
 )
 
 type Route struct {
@@ -16,6 +16,12 @@ type Route struct {
 type Routes []Route
 
 var routes = Routes{
+	Route{
+		"getMergeList",
+		"get",
+		"/mergedlist/",
+		handler.GetMergeList,
+	},
 	Route{
 		"healthCheck",
 		"GET",
