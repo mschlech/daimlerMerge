@@ -11,7 +11,7 @@ Memory consumption ?
 
 
 
-![pipeline status](https://gitlab.com/mschlech/beelogger-service/badges/master/pipeline.svg)](https://gitlab.com/mschlech/daimlerMerge)
+![pipeline status](https://gitlab.com/mschlechdaimer_merge/badges/master/pipeline.svg)](https://gitlab.com/mschlech/daimler_merge)
 
 # start the docker container 
 CONTAINER_NAME = docker images
