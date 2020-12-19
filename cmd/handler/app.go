@@ -18,7 +18,7 @@ type Interval struct {
 merge gets the interval of number , unsorted tuples, but sorting first
 O(n log n) problem sorting , n is the number of elements to be sorted
 */
-func merge1(intervals []Interval) []Interval{
+func merge1(intervals []Interval) []Interval {
 	fmt.Println("Interval : ", intervals)
 	if len(intervals) == 0 {
 		log.Print("given interval empty")
@@ -72,17 +72,16 @@ func getInterval(intervals []Interval, cur Interval, res []Interval) (Interval, 
 	return cur, res
 }
 
-func generate(randMatrix [][]int, givenLength int)  {
-
+func generate(randMatrix [][]int, givenLength int) {
 
 	//var v = []Interval{}
-	tmp:=make([]Interval,givenLength)
+	tmp := make([]Interval, givenLength)
 	var a []Interval
 	for i := range tmp {
 		for j := range tmp {
-		tmp[j].offset = rand.Intn(givenLength)
-		tmp[i].end= rand.Intn(givenLength)
-			log.Println("i:",tmp[i], "j:" , tmp[j])
+			tmp[j].offset = rand.Intn(givenLength)
+			tmp[i].end = rand.Intn(givenLength)
+			log.Println("i:", tmp[i], "j:", tmp[j])
 			//a = Interval{tmp[i].offset,tmp[j].end}
 		}
 

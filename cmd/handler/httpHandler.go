@@ -1,8 +1,10 @@
 package handler
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+
 	"github.com/gorilla/mux"
 )
 
@@ -19,8 +21,10 @@ func GetMergeList(w http.ResponseWriter, r *http.Request) {
 	intervals := []Interval{{25, 30}, {2, 19}, {14, 23}, {4, 8}}
 
 	var a = merge1(intervals)
-	log.Println("interval : ",intervals, "mergedList : " , a )
-	jsonResponse(w,http.StatusOK,merge1(intervals) )
+	log.Println("interval : ", intervals, "mergedList : ", a)
+	t := map[string]string{"mergedList: ": fmt.Sprintf("%v", a)}
+	log.Print("t : ", t)
+	jsonResponse(w, http.StatusOK, t)
 
 }
 

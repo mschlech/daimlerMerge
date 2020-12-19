@@ -28,4 +28,10 @@ var routes = Routes{
 		"/healthcheck/",
 		handler.GetHealthCheck,
 	},
+	Route{
+		"benchMark",
+		"GET",
+		"/benchmarkk/",
+		handler.GetBenchmark,
+	},
 }

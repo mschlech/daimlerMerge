@@ -19,10 +19,10 @@ BIN := daimler_merge
 REGISTRY ?= mschlech
 
 # This version-strategy uses git tags to set the version string
-VERSION ?= $(shell git describe --tags --always --dirty)
+VERSION := $(shell git describe --tags --always --dirty)
 #
 # This version-strategy uses a manual value to set the version string
-VERSION ?= 1.2.3
+#VERSION := 1.2.3
 
 ###
 ### These variables should not need tweaking.
@@ -38,13 +38,11 @@ OS := $(if $(GOOS),$(GOOS),$(shell go env GOOS))
 ARCH := $(if $(GOARCH),$(GOARCH),$(shell go env GOARCH))
 
 BASEIMAGE ?= gcr.io/distroless/static
-#BASEIMAGE ?= gcr.io/distroless/base
-#BASEIMAGE ?= golang:alpine
 
 IMAGE := $(REGISTRY)/$(BIN)
 TAG := $(VERSION)__$(OS)_$(ARCH)
 
-BUILD_IMAGE ?= golang:1.13-alpine
+BUILD_IMAGE ?= golang:1.12-alpine
 
 # If you want to build all binaries, see the 'all-build' rule.
 # If you want to build all containers, see the 'all-container' rule.
@@ -153,7 +151,8 @@ container: .container-$(DOTFILE_IMAGE) say_container_name
 say_container_name:
 	@echo "container: $(IMAGE):$(TAG)"
 
-push: .container-$(DOTFILE_IMAGE) say_push_name
+push: .push-$(DOTFILE_IMAGE) say_push_name
+.push-$(DOTFILE_IMAGE): .container-$(DOTFILE_IMAGE)
 	@docker push $(IMAGE):$(TAG)
 
 say_push_name:
@@ -195,10 +194,13 @@ test: $(BUILD_DIRS)
 $(BUILD_DIRS):
 	@mkdir -p $@
 
+start:
+	go run $(GO_FILES) & echo $$! > $(PID_FILE)
+
 clean: container-clean bin-clean
 
 container-clean:
-	rm -rf .container-* .dockerfile-*
+	rm -rf .container-* .dockerfile-* .push-*
 
 bin-clean:
 	rm -rf .go bin
