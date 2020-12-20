@@ -1,0 +1,8 @@
+FROM gcr.io/distroless/static
+
+ADD bin/linux_arm/daimler_merge /daimler_merge
+
+# This would be nicer as `nobody:nobody` but distroless has no such entries.
+USER 65535:65535
+EXPOSE 5050/tcp
+ENTRYPOINT ["/daimler_merge"]

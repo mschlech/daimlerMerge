@@ -25,25 +25,25 @@ func merge1(intervals []Interval) []Interval {
 	}
 
 	//It sorts a slice using a provided function
-	sort.Slice(intervals, func(i, j int) bool {
-		a, b := intervals[i], intervals[j]
-		log.Println("a offset :", a.offset, "b offset :", b.offset)
-
-		log.Println("a end :", a.end, "b end :", b.end)
-		log.Println("t : ", a.offset < b.offset || (a.offset == b.offset && a.end > b.end))
-		b2 := a.offset < b.offset || (a.offset == b.offset && a.end > b.end)
-
-		return b2
-
-	})
+	//sort.Slice(intervals, func(i, j int) bool {
+	//	a, b := intervals[i], intervals[j]
+	//	log.Println("a offset :", a.offset, "b offset :", b.offset)
+	//
+	//	log.Println("a end :", a.end, "b end :", b.end)
+	//	log.Println("t : ", a.offset < b.offset || (a.offset == b.offset && a.end > b.end))
+	//	b2 := a.offset < b.offset || (a.offset == b.offset && a.end > b.end)
+	//
+	//	return b2
+	//
+	//})
 
 	//To sort the slice while keeping the original order of equal elements
-	//sort.SliceStable(intervals, func(i, j int) bool {
-	//	a, b := intervals[i], intervals[j]
-	//	fmt.Println("a:", a.offset)
-	//	fmt.Println("b:", b.offset)
-	//	return a.offset < b.offset || (a.offset == b.offset && a.end > b.end)
-	//})
+	sort.SliceStable(intervals, func(i, j int) bool {
+		a, b := intervals[i], intervals[j]
+		fmt.Println("a:", a.offset)
+		fmt.Println("b:", b.offset)
+		return a.offset < b.offset || (a.offset == b.offset && a.end > b.end)
+	})
 
 	res := []Interval{}
 	cur := intervals[0]
@@ -71,6 +71,44 @@ func getInterval(intervals []Interval, cur Interval, res []Interval) (Interval, 
 	log.Println("cur ", cur, "res", res)
 	return cur, res
 }
+
+func merge(ivs []Interval) []Interval {
+	m := append([]Interval(nil), ivs...)
+	if len(m) <= 1 {
+		return m
+	}
+
+	funcName(m)
+
+	j := 0
+	for i := 1; i < len(m); i++ {
+		if m[j].end >= m[i].offset {
+			if m[j].end < m[i].end {
+				m[j].end = m[i].end
+			}
+		} else {
+			j++
+			m[j] = m[i]
+		}
+
+	}
+	return append([]Interval(nil), m[:j+1]...)
+}
+
+func funcName(m []Interval) {
+	sort.Slice(m,
+		func(i, j int) bool {
+			if m[i].offset < m[j].offset {
+				return true
+			}
+			if m[i].end == m[j].offset && m[i].end < m[j].end {
+				return true
+			}
+			return false
+		},
+	)
+}
+
 
 func generate(randMatrix [][]int, givenLength int) {
 

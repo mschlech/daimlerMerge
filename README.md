@@ -23,4 +23,9 @@ within your IDE run the Main Method
 
 http://localhost:8080/mergedList
 
-## n problem
+## Time complexity and resulting computational drawbacks
+
+The interval to be found is the result of comparing 2 values. The first one of a tuple and the second one. The first one is the offset in the code and the second one the end. The notation may be misleading.
+ One complexity is the O(n2) which can be optimized by sorting which results in a O(logn) situation. 
+
+![alg](doc/images/Alg.png)

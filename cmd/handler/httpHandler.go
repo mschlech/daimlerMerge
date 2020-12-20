@@ -19,8 +19,9 @@ func GetMergeList(w http.ResponseWriter, r *http.Request) {
 	var err error
 	log.Print(err, vars)
 	intervals := []Interval{{25, 30}, {2, 19}, {14, 23}, {4, 8}}
-
-	var a = merge1(intervals)
+	//intervals := []Interval{{8 ,10}, {2 ,6}, {1 ,3}, {15, 18}}
+	//var a = merge1(intervals)
+	var a = merge(intervals)
 	log.Println("interval : ", intervals, "mergedList : ", a)
 	t := map[string]string{"mergedList: ": fmt.Sprintf("%v", a)}
 	log.Print("t : ", t)
