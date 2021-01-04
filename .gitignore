@@ -7,6 +7,7 @@
 .go
 .idea
 .docker*
+.container*
 bin
 
 # Test binary, built with `go test -c`

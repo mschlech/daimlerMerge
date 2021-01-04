@@ -4,5 +4,6 @@ ADD bin/windows_amd64/daimler_merge.exe /daimler_merge.exe
 
 # This would be nicer as `nobody:nobody` but distroless has no such entries.
 USER 65535:65535
+ENV HOME /
 EXPOSE 5050/tcp
 ENTRYPOINT ["/daimler_merge.exe"]

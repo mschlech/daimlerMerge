@@ -15,7 +15,8 @@ VERSION ?= $(shell git describe --tags --always --dirty)
 
 SRC_DIRS := cmd pkg # directories which hold app source (not vendored)
 
-ALL_PLATFORMS := linux/amd64 linux/arm linux/arm64 linux/ppc64le linux/s390x windows/amd64
+#ALL_PLATFORMS := linux/amd64 linux/arm linux/arm64 linux/ppc64le linux/s390x windows/amd64
+ALL_PLATFORMS := linux/amd64
 
 # Used internally.  Users should pass GOOS and/or GOARCH.
 OS := $(if $(GOOS),$(GOOS),$(shell go env GOOS))

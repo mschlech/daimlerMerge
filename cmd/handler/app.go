@@ -3,8 +3,15 @@ package handler
 import (
 	"fmt"
 	"log"
-	"math/rand"
 	"sort"
+)
+
+/**
+the app can also run on its own would only need a main method
+*/
+import (
+	"math/rand"
+	"time"
 )
 
 /* the struct for the beginning and the end of the interval e.g
@@ -15,7 +22,7 @@ type Interval struct {
 }
 
 /**
-merge gets the interval of number , unsorted tuples, but sorting first
+merge1 as an alternative approach. Gets the interval of number , unsorted tuples, but sorting first
 O(n log n) problem sorting , n is the number of elements to be sorted
 */
 func merge1(intervals []Interval) []Interval {
@@ -23,19 +30,6 @@ func merge1(intervals []Interval) []Interval {
 	if len(intervals) == 0 {
 		log.Print("given interval empty")
 	}
-
-	//It sorts a slice using a provided function
-	//sort.Slice(intervals, func(i, j int) bool {
-	//	a, b := intervals[i], intervals[j]
-	//	log.Println("a offset :", a.offset, "b offset :", b.offset)
-	//
-	//	log.Println("a end :", a.end, "b end :", b.end)
-	//	log.Println("t : ", a.offset < b.offset || (a.offset == b.offset && a.end > b.end))
-	//	b2 := a.offset < b.offset || (a.offset == b.offset && a.end > b.end)
-	//
-	//	return b2
-	//
-	//})
 
 	//To sort the slice while keeping the original order of equal elements
 	sort.SliceStable(intervals, func(i, j int) bool {
@@ -54,10 +48,14 @@ func merge1(intervals []Interval) []Interval {
 	return res
 }
 
+/**
+method which is invoked only by the alternative merge1 method.
+See above. might have one issue as it was missing an interval result
+*/
 func getInterval(intervals []Interval, cur Interval, res []Interval) (Interval, []Interval) {
-	//fmt.Println("given interval : ", intervals, "cur : ", cur)
+	log.Print("given interval : ", intervals, "cur : ", cur)
 	for _, p := range intervals {
-		fmt.Println("p.offset : ", p.offset, "cur end: ", cur.end, "p : ", p)
+		log.Print("p.offset : ", p.offset, "cur end: ", cur.end, "p : ", p)
 		if p.offset > cur.end {
 			res = append(res, cur)
 			cur = p
@@ -72,13 +70,21 @@ func getInterval(intervals []Interval, cur Interval, res []Interval) (Interval, 
 	return cur, res
 }
 
+/**
+function which merge the intervals to a result interface of type  interval.
+*/
 func merge(ivs []Interval) []Interval {
 	m := append([]Interval(nil), ivs...)
 	if len(m) <= 1 {
 		return m
 	}
+	// just for curiosity. Could be exposed to a logging interface to provide this to an external logging entity.
+	// checking on thresholds could lead to an autoscaling approach.
+	var startBoolCheck = time.Now().UnixNano()
+	checkInRange(m)
+	var endBoolCheck = time.Now().UnixNano()
 
-	funcName(m)
+	log.Print("check funcName took: ", endBoolCheck-startBoolCheck, "nsec")
 
 	j := 0
 	for i := 1; i < len(m); i++ {
@@ -95,7 +101,10 @@ func merge(ivs []Interval) []Interval {
 	return append([]Interval(nil), m[:j+1]...)
 }
 
-func funcName(m []Interval) {
+/**
+implcitly private method which checks if the range within a touple fits and returns a boolean
+*/
+func checkInRange(m []Interval) {
 	sort.Slice(m,
 		func(i, j int) bool {
 			if m[i].offset < m[j].offset {
@@ -109,7 +118,9 @@ func funcName(m []Interval) {
 	)
 }
 
-
+/**
+not in use as of time constraints. Method should provide a random list of interface intervals.
+*/
 func generate(randMatrix [][]int, givenLength int) {
 
 	//var v = []Interval{}
@@ -124,37 +135,5 @@ func generate(randMatrix [][]int, givenLength int) {
 		}
 
 	}
-
 	log.Println(a)
-	////var randomOut [][]int
-	//for i, innerArray := range randMatrix {
-	//	for j := range innerArray {
-	//		randMatrix[i][j] = rand.Intn(givenLength)
-	//	}
-	//}
-	//fmt.Println("randomMatrix :"  ,randMatrix)
-	//return v
 }
-
-//
-//func main() {
-//	//result :  &[{2 19} {25 30}]
-//	intervals := []Interval{{25, 30}, {2, 19}, {14, 23}, {4, 8}}
-//    //A := []Interval{}
-//	rand.Seed(time.Now().Unix())
-//	//	intervals2 := []Interval{generate()}
-//	//intervalsRandom := []Interval{rand.Perm(100), rand.Perm(100)}
-//	merge1(intervals)
-//	//merge1(intervalsRandom)
-//	var givenLength = 100
-//	randMatrix := make([][]int, givenLength)
-//	for i := 0; i < 100; i++ {
-//		randMatrix[i] = make([]int, 2)
-//		//fmt.Println("out: ", randMatrix[i])
-//		//append(A, randMatrix[i])
-//	}
-//	generate(randMatrix,givenLength)
-//
-//	fmt.Println(randMatrix)
-//
-//}

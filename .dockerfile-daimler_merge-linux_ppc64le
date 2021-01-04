@@ -4,5 +4,6 @@ ADD bin/linux_ppc64le/daimler_merge /daimler_merge
 
 # This would be nicer as `nobody:nobody` but distroless has no such entries.
 USER 65535:65535
+ENV HOME /
 EXPOSE 5050/tcp
 ENTRYPOINT ["/daimler_merge"]
