@@ -1,5 +1,9 @@
 ![logo](doc/images/logo.png)
+
 # Daimler Merge
+
+![pipeline status](https://gitlab.com/mschlechdaimer_merge/badges/master/pipeline.svg)](https://gitlab.com/mschlech/daimler_merge)
+
 
 Implementation of a MERGE Function which takes a list of intervals which returns a list of all non overlapping intervalls subsequently.
 
@@ -10,9 +14,14 @@ Runtime of the implementation ?
 How can a robustness of the implmentation being fullfilled of huge amount of incoming lists ?
 Memory consumption ?
 
+## Time complexity and resulting computational drawbacks
+
+The interval to be found is the result of comparing 2 values. The first one of a tuple and the second one. The first one is the offset in the code and the second one the end. The notation may be misleading.
+One complexity is the O(n2) which can be optimized by sorting which results in a O(logn) situation.
+
+![alg](doc/images/Alg.png)
 
 
-![pipeline status](https://gitlab.com/mschlechdaimer_merge/badges/master/pipeline.svg)](https://gitlab.com/mschlech/daimler_merge)
 
 # build and start the docker container 
 
@@ -33,27 +42,26 @@ After the build is finished you can start the container as follows
 
 fetch the container names with docker images and choose a container
 
-docker run -t -i -p 3000:3000 -ti --rm --init <containerName>
+docker run -t -i -p 4000:4000 -ti --rm --init <containerName>
 
 
 ## run inside the ide.
-Within the Jetbrains golang IDE you can click 
-within your IDE run the Main Method 
+Within the Jetbrains golang IDE you can click on the play symbol  
+within your IDE and run the Main Method 
+You can invoke the following url from your browser.
 
-http://localhost:3000/mergedlist
-
-## Time complexity and resulting computational drawbacks
-
-The interval to be found is the result of comparing 2 values. The first one of a tuple and the second one. The first one is the offset in the code and the second one the end. The notation may be misleading.
- One complexity is the O(n2) which can be optimized by sorting which results in a O(logn) situation. 
-
-![alg](doc/images/Alg.png)
+http://localhost:4000/mergedlist
 
 
 ## deployment 
 Further deployment information for a Kubernetes Deployment resides in the *kubernetes* directory in root of this repo.
 
 ## monitoring 
+
+### initial setup 
+Install a grafana docker container upfront.
+
+```docker run -d -p 3000:3000 --name grafana grafana/grafana:6.5.0```
 
 there is a simple beginning approach using prometheus.
 You can call the http://localhost:3000/mergedlist to invoke the functional REST Endpoint to request a mergedlist
