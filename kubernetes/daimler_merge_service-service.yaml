@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment                 # Type of Kubernetes resource
 metadata:
-  name: beelogger-service           # Name of the Kubernetes resource
+  name: daimler_merge           # Name of the Kubernetes resource
 spec:
   replicas: 3                    # Number of pods to run at any given time
   selector:
     matchLabels:
-      app: beelogger-service       # This deployment applies to any Pods matching the specified label
+      app: daimler_merge      # This deployment applies to any Pods matching the specified label
   template:                      # This deployment will create a set of pods using the configurations in this template
     metadata:
       labels:                    # The labels that will be applied to all of the pods in this deployment
-        app: beelogger-service
+        app: daimler_merge
     spec:                        # Spec for the container which will run in the Pod
       containers:
-      - name: beelogger-service
-        image: mschlech/beelogger-service:1.0.0
+      - name: daimler_merge
+        image: mschlech/daimler_merge:1.0.0
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 8080  # Should match the port number that the Go application listens on
