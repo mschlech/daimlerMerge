@@ -1,3 +1,4 @@
+![logo](doc/images/logo.png)
 # Daimler Merge
 
 Implementation of a MERGE Function which takes a list of intervals which returns a list of all non overlapping intervalls subsequently.
@@ -15,7 +16,7 @@ Memory consumption ?
 
 # build and start the docker container 
 
-##build the container. 
+## build the container. 
 You can build for the following platforms your container :
 
 - linux/amd64 
@@ -50,6 +51,35 @@ The interval to be found is the result of comparing 2 values. The first one of a
 
 
 ## deployment 
-
+Further deployment information for a Kubernetes Deployment resides in the *kubernetes* directory in root of this repo.
 
 ## monitoring 
+
+there is a simple beginning approach using prometheus.
+You can call the http://localhost:3000/mergedlist to invoke the functional REST Endpoint to request a mergedlist
+After this call you can invoke http://localhost:3000/metrics to optain prometheus results. You get a list of prometheus metrics
+
+You should find the registered mehtod and resulting metrics
+```bazaar
+....
+
+# HELP http_request_get_metrics_of_merge_duration_seconds get the latency of a merge operation merging intervals
+# TYPE http_request_get_metrics_of_merge_duration_seconds histogram
+http_request_get_metrics_of_merge_duration_seconds_bucket{status="",le="0.01"} 1
+http_request_get_metrics_of_merge_duration_seconds_bucket{status="",le="0.060000000000000005"} 1
+http_request_get_metrics_of_merge_duration_seconds_bucket{status="",le="0.11000000000000001"} 1
+http_request_get_metrics_of_merge_duration_seconds_bucket{status="",le="0.16000000000000003"} 1
+http_request_get_metrics_of_merge_duration_seconds_bucket{status="",le="0.21000000000000002"} 1
+http_request_get_metrics_of_merge_duration_seconds_bucket{status="",le="0.26"} 1
+http_request_get_metrics_of_merge_duration_seconds_bucket{status="",le="0.31"} 1
+http_request_get_metrics_of_merge_duration_seconds_bucket{status="",le="0.36"} 1
+http_request_get_metrics_of_merge_duration_seconds_bucket{status="",le="0.41"} 1
+http_request_get_metrics_of_merge_duration_seconds_bucket{status="",le="0.45999999999999996"} 1
+http_request_get_metrics_of_merge_duration_seconds_bucket{status="",le="+Inf"} 1
+http_request_get_metrics_of_merge_duration_seconds_sum{status=""} 0.000257947
+http_request_get_metrics_of_merge_duration_seconds_count{status=""} 1
+
+....
+
+```
+

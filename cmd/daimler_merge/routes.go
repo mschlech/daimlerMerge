@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/mschlech/daimler_merge/cmd/handler"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 type Route struct {
@@ -31,7 +32,13 @@ var routes = Routes{
 	Route{
 		"benchMark",
 		"GET",
-		"/benchmarkk/",
-		handler.GetBenchmark,
+		"/simplemetrics/",
+		handler.GetMetrics,
+	},
+	Route{
+		"prometheus",
+		"GET",
+		"/metrics/",
+		promhttp.Handler().ServeHTTP,
 	},
 }
