@@ -61,7 +61,7 @@ Install a grafana docker container upfront.
 ```docker run -d -p 3000:3000 --name grafana grafana/grafana:6.5.0```
 
 there is a simple beginning approach using prometheus.
-You can call the http://localhost:4000/mergedlist to invoke the functional REST Endpoint to request a mergedlist
+You can call the http://localhost:4000/mergedlist to invoke the functional REST Endpoint to request a mergedlist.
 After this call you can invoke http://localhost:4000/metrics to optain prometheus results. You get a list of prometheus metrics
 
 You should find the registered mehtod and resulting metrics
