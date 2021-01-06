@@ -2,8 +2,6 @@
 
 # Daimler Merge
 
-![pipeline status](https://gitlab.com/mschlechdaimer_merge/badges/master/pipeline.svg)](https://gitlab.com/mschlech/daimler_merge)
-
 
 Implementation of a MERGE Function which takes a list of intervals which returns a list of all non overlapping intervalls subsequently.
 
