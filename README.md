@@ -91,3 +91,13 @@ http_request_get_metrics_of_merge_duration_seconds_count{status=""} 1
 
 ```
 
+
+# TODO 
+to finish 
+- kubernetes deployment, healtcheck and readiness 
+- monitoring with grafana and prometheus
+- deployment & integration ( infrastructre e.g with terraform , rest with helm)
+- finalize tests
+- load tests , E2E 
+nice to have not finished > one endpoint for random intervals of configurable size to measure the performance
+  
