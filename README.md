@@ -38,14 +38,13 @@ for testing purposes only the linux/amd64 is build. If you like to build all the
 ## start the container
 After the build is finished you can start the container as follows
 
-fetch the container names with docker images and choose a container
+fetch the container names with *docker images* and choose a container
 
 docker run -t -i -p 4000:4000 -ti --rm --init <containerName>
 
 
 ## run inside the ide.
-Within the Jetbrains golang IDE you can click on the play symbol  
-within your IDE and run the Main Method 
+Within the Jetbrains golang IDE you can click on the play symbol run the Main Method.
 You can invoke the following url from your browser.
 
 http://localhost:4000/mergedlist
@@ -96,6 +95,9 @@ to finish
 - monitoring with grafana and prometheus
 - deployment & integration ( infrastructre e.g with terraform , rest with helm)
 - finalize tests
-- load tests , E2E 
+- load tests , E2E
+- provide Dockerfiles for grafana and prometheus
+- run script as simple wrapper and start to simplify the make all-container , docker run command
+
 nice to have not finished > one endpoint for random intervals of configurable size to measure the performance
-  - run script as simple wrapper and start to simplify the make all-container , docker run command
+  
