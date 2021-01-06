@@ -64,8 +64,8 @@ Install a grafana docker container upfront.
 ```docker run -d -p 3000:3000 --name grafana grafana/grafana:6.5.0```
 
 there is a simple beginning approach using prometheus.
-You can call the http://localhost:3000/mergedlist to invoke the functional REST Endpoint to request a mergedlist
-After this call you can invoke http://localhost:3000/metrics to optain prometheus results. You get a list of prometheus metrics
+You can call the http://localhost:4000/mergedlist to invoke the functional REST Endpoint to request a mergedlist
+After this call you can invoke http://localhost:4000/metrics to optain prometheus results. You get a list of prometheus metrics
 
 You should find the registered mehtod and resulting metrics
 ```bazaar
@@ -100,4 +100,4 @@ to finish
 - finalize tests
 - load tests , E2E 
 nice to have not finished > one endpoint for random intervals of configurable size to measure the performance
-  
+  - run script as simple wrapper and start to simplify the make all-container , docker run command
